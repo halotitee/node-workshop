@@ -49,8 +49,22 @@ getAddressPosition()
 });
 
 function getCurrentTemperatureAtPosition(position) {
-
+    return request('https://api.darksky.net/forecast/86669f54b0c54457c00ea278533f42b2/37.8267,-122.4233')
+    .then(
+        function(temperature) {
+            var data = JSON.parse(temperature);
+            
+            return data.currently.temperature;
+        });
 }
+
+getCurrentTemperatureAtPosition()
+.then(function(position) {
+    console.log('The position of Temperature is', position);
+})
+.catch(function(error) {
+    console.log('Something went wrong', error.stack);
+});
 
 function getCurrentTemperature(address) {
 
