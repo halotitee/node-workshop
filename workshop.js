@@ -31,8 +31,22 @@ getIssPosition()
 
 
 function getAddressPosition(address) {
-
+    return request('https://maps.googleapis.com/maps/api/geocode/json?address=' + address)
+    .then(
+        function(response) {
+            var data = JSON.parse(response);
+            
+            return data.results[0].geometry.location;
+        });
 }
+
+getAddressPosition()
+.then(function(position) {
+    console.log('The position of Address is', position);
+})
+.catch(function(error) {
+    console.log('Something went wrong', error.stack);
+});
 
 function getCurrentTemperatureAtPosition(position) {
 
