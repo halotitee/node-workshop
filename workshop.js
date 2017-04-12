@@ -6,14 +6,29 @@ function getDistance(pos1, pos2) {
 }
 
 function getIssPosition() {
-    return request(/* ... */)
+    return request('http://api.open-notify.org/iss-now.json')
         .then(
-            function(responce) {
+            function(response) {
                 // Parse as JSON
+                var data = JSON.parse(response); 
+                var newPos = {
+                    lat: data.iss_position.latitude,
+                    lng: data.iss_position.longitude
+                };
                 // Return object with lat and lng
+                return newPos;
             }
-        )
+        );
 }
+
+getIssPosition()
+.then(function(position) {
+    console.log('The position of ISS is', position);
+})
+.catch(function(error) {
+    console.log('Something went wrong', error.stack);
+});
+
 
 function getAddressPosition(address) {
 
