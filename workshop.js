@@ -49,7 +49,7 @@ getAddressPosition()
 });
 
 function getCurrentTemperatureAtPosition(position) {
-    return request('https://api.darksky.net/forecast/86669f54b0c54457c00ea278533f42b2/37.8267,-122.4233')
+    return request('https://api.darksky.net/forecast/86669f54b0c54457c00ea278533f42b2/' + position)
     .then(
         function(temperature) {
             var data = JSON.parse(temperature);
@@ -66,8 +66,9 @@ getCurrentTemperatureAtPosition()
     console.log('Something went wrong', error.stack);
 });
 
-function getCurrentTemperature(address) {
 
+function getCurrentTemperature(address) {
+    
 }
 
 function getDistanceFromIss(address) {
